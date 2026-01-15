@@ -1,11 +1,12 @@
 package com.example.projetrandrianalisoa.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,11 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.example.projetrandrianalisoa.R;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,17 +35,14 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
-
-        /*try {
-            BufferedReader br = new BufferedReader(
-                    new InputStreamReader(getAssets().open("qcm01.txt"))
-            );
-            Log.d("TEST", br.readLine());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
     }
 
+    public void onAnswerSurvey(View view) {
+        Intent intent = new Intent(this, SurveyActivity.class);
+        startActivity(intent);
+    }
+
+    ////////////// Gestion des menus ///////////////
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -60,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         return true;
     }
+
+    ////////////////////////////////////////////////
 
     public void onCancel(View view) {
         setResult(RESULT_CANCELED);
