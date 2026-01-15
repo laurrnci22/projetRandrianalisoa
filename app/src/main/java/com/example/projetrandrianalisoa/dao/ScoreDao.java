@@ -1,42 +1,72 @@
 package com.example.projetrandrianalisoa.dao;
 
+import java.util.List;
+
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Delete;
 
 import com.example.projetrandrianalisoa.model.ScoreEntity;
 
-import java.util.List;
-
+/**
+ * DAO pour gérer les scores des questionnaires.
+ */
 @Dao
 public interface ScoreDao {
 
-    // Insérer un score
+    /**
+     * Insère un score dans la base de données.
+     *
+     * @param score le score à insérer
+     */
     @Insert
-    long insertScore(ScoreEntity score);
+    void insertScore(ScoreEntity score);
 
-    // Récupérer tous les scores
+    /**
+     * Récupère tous les scores présents dans la base.
+     *
+     * @return liste de tous les scores
+     */
     @Query("SELECT * FROM scores")
     List<ScoreEntity> getAllScores();
 
-    // Récupérer les scores pour un questionnaire spécifique
+    /**
+     * Récupère les scores pour un questionnaire spécifique.
+     *
+     * @param surveyId l'identifiant du questionnaire
+     * @return liste des scores pour ce questionnaire
+     */
     @Query("SELECT * FROM scores WHERE surveyId = :surveyId")
     List<ScoreEntity> getScoresForSurvey(long surveyId);
 
-    // Récupérer le dernier score pour un questionnaire
+    /**
+     * Récupère le dernier score enregistré pour un questionnaire.
+     *
+     * @param surveyId l'identifiant du questionnaire
+     * @return dernier score pour ce questionnaire
+     */
     @Query("SELECT * FROM scores WHERE surveyId = :surveyId ORDER BY timestamp DESC LIMIT 1")
     ScoreEntity getLastScoreForSurvey(long surveyId);
 
-    // Récupérer la moyenne de tous les scores
+    /**
+     * Calcule la moyenne de tous les scores.
+     *
+     * @return moyenne des scores
+     */
     @Query("SELECT AVG(score) FROM scores")
     float getAverageScore();
 
-    // Supprimer tous les scores (réinitialisation)
+    /**
+     * Supprime tous les scores de la base de données.
+     */
     @Query("DELETE FROM scores")
     void deleteAllScores();
 
-    // Supprimer les scores pour un questionnaire spécifique
+    /**
+     * Supprime les scores pour un questionnaire spécifique.
+     *
+     * @param surveyId l'identifiant du questionnaire
+     */
     @Query("DELETE FROM scores WHERE surveyId = :surveyId")
     void deleteScoresForSurvey(long surveyId);
 }

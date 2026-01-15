@@ -1,9 +1,24 @@
 <resources>
+    <!-- Générique -->
     <string name="app_name">projetRandrianalisoa</string>
-    <string name="exit_app">Quitter l\'application</string>
     <string name="qcm_app">QCM APP</string>
+    <string name="back">Retour</string>
+    <string name="category_label">Catégorie</string>
+
+    <!-- MainActivity -->
+    <string name="exit_app">Quitter l\'application</string>
     <string name="answer_survey">Répondre à un questionnaire</string>
     <string name="test_your_knowledge">Testez vos connaissances</string>
+
+    <!-- SurveyActivity -->
     <string name="select_survey">Sélectionner un questionnaire</string>
-    <string name="back">Retour</string>
+
+    <!-- QuizActivity -->
+    <string name="question_label">Libellé de la question</string>
+    <string name="choice_1">Choix 1</string>
+    <string name="choice_2">Choix 2</string>
+    <string name="choice_3">Choix 3</string>
+    <string name="btnValidate">Valider</string>
+    <string name="btnStop">Stopper</string>
+    <string name="question_1_5">Question 1/5</string>
 </resources>

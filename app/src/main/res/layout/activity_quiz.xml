@@ -51,7 +51,7 @@
         android:id="@+id/textCategory"
         android:layout_width="104dp"
         android:layout_height="32dp"
-        android:text="Catégorie"
+        android:text="@string/category_label"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -65,7 +65,7 @@
         android:id="@+id/textQuestionNumber"
         android:layout_width="95dp"
         android:layout_height="18dp"
-        android:text="Question 1/5"
+        android:text="@string/question_1_5"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,16 +76,21 @@
 
     <TextView
         android:id="@+id/textQuestion"
-        android:layout_width="168dp"
-        android:layout_height="37dp"
-        android:text="Libellé de la question"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="none"
+        android:gravity="center"
+        android:scrollHorizontally="false"
+        android:singleLine="false"
+        android:text="@string/question_label"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.319" />
+        app:layout_constraintVertical_bias="0.311" />
 
     <RadioGroup
         android:id="@+id/radioGroupChoices"
@@ -94,7 +99,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.319"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499">
@@ -103,26 +108,26 @@
             android:id="@+id/radioChoice1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choix 1" />
+            android:text="@string/choice_1" />
 
         <RadioButton
             android:id="@+id/radioChoice2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choix 2" />
+            android:text="@string/choice_2" />
 
         <RadioButton
             android:id="@+id/radioChoice3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choix 3" />
+            android:text="@string/choice_3" />
     </RadioGroup>
 
     <Button
         android:id="@+id/buttonValidate"
         android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:text="Valider"
+        android:text="@string/btnValidate"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -134,7 +139,7 @@
         android:id="@+id/buttonStop"
         android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:text="Stopper"
+        android:text="@string/btnStop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
