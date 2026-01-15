@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.projetrandrianalisoa.model.ScoreEntity;
+import com.example.projetrandrianalisoa.model.ScoreWithTotal;
 
 /**
  * DAO pour gérer les scores des questionnaires.
@@ -69,4 +70,12 @@ public interface ScoreDao {
      */
     @Query("DELETE FROM scores WHERE surveyId = :surveyId")
     void deleteScoresForSurvey(long surveyId);
+
+    // Récupérer tous les scores avec le nom du questionnaire
+    @Query("SELECT s.category, sc.score, COUNT(q.id) as totalQuestions " +
+            "FROM surveys s " +
+            "JOIN scores sc ON s.id = sc.surveyId " +
+            "JOIN questions q ON s.id = q.surveyId " +
+            "GROUP BY s.id")
+    List<ScoreWithTotal> getScoresWithTotal();
 }

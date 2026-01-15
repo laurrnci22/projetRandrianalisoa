@@ -9,6 +9,8 @@
     <string name="exit_app">Quitter l\'application</string>
     <string name="answer_survey">Répondre à un questionnaire</string>
     <string name="test_your_knowledge">Testez vos connaissances</string>
+    <string name="btnViewScore">Voir les scores</string>
+    <string name="btnResetScore">Réinitialiser les scores</string>
 
     <!-- SurveyActivity -->
     <string name="select_survey">Sélectionner un questionnaire</string>
@@ -21,4 +23,7 @@
     <string name="btnValidate">Valider</string>
     <string name="btnStop">Stopper</string>
     <string name="question_1_5">Question 1/5</string>
+
+    <!-- ViewScoreActivity -->
+    <string name="score_s">Score(s)</string>
 </resources>

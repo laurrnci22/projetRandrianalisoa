@@ -3,6 +3,7 @@ package com.example.projetrandrianalisoa.dao;
 import java.util.List;
 
 import androidx.room.Dao;
+import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.projetrandrianalisoa.model.QuestionEntity;
@@ -30,4 +31,6 @@ public interface QuestionDao {
      */
     @Query("SELECT COUNT(*) FROM questions WHERE surveyId = :surveyId")
     int getQuestionCountBySurvey(long surveyId);
+    @Insert
+    void insertAll(List<QuestionEntity> questions);
 }

@@ -57,4 +57,7 @@ public interface SurveyDao {
      */
     @Update
     void update(SurveyEntity survey);
+
+    @Update
+    void updateAll(List<SurveyEntity> surveys);
 }

@@ -49,30 +49,39 @@
 
     <TextView
         android:id="@+id/textCategory"
-        android:layout_width="104dp"
-        android:layout_height="32dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="none"
+        android:gravity="center"
+        android:scrollHorizontally="false"
+        android:singleLine="false"
         android:text="@string/category_label"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13" />
+        app:layout_constraintVertical_bias="0.14" />
 
     <TextView
         android:id="@+id/textQuestionNumber"
-        android:layout_width="95dp"
-        android:layout_height="18dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="none"
+        android:gravity="center"
+        android:scrollHorizontally="false"
+        android:singleLine="false"
         android:text="@string/question_1_5"
-        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.22" />
+        app:layout_constraintVertical_bias="0.223" />
 
     <TextView
         android:id="@+id/textQuestion"
@@ -90,12 +99,12 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.311" />
+        app:layout_constraintVertical_bias="0.299" />
 
     <RadioGroup
         android:id="@+id/radioGroupChoices"
-        android:layout_width="239dp"
-        android:layout_height="142dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -108,19 +117,31 @@
             android:id="@+id/radioChoice1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/choice_1" />
+            android:text="@string/choice_1"
+            android:gravity="center"
+            android:singleLine="false"
+            android:ellipsize="none"
+            android:scrollHorizontally="false" />
 
         <RadioButton
             android:id="@+id/radioChoice2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/choice_2" />
+            android:text="@string/choice_2"
+            android:gravity="center"
+            android:singleLine="false"
+            android:ellipsize="none"
+            android:scrollHorizontally="false" />
 
         <RadioButton
             android:id="@+id/radioChoice3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/choice_3" />
+            android:text="@string/choice_3"
+            android:gravity="center"
+            android:singleLine="false"
+            android:ellipsize="none"
+            android:scrollHorizontally="false" />
     </RadioGroup>
 
     <Button
