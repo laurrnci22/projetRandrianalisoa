@@ -50,7 +50,6 @@ public class QuizActivity extends AppCompatActivity {
     private int currentIndex = 0;       // Question courante
     private int score = 0;              // Score accumulé
     private String category;            // Catégorie du quiz
-
     private AppDatabase db;             // Instance de la base Room
     private long surveyId;              // ID du questionnaire
 

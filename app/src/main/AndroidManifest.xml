@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetRandrianalisoa">
         <activity
+            android:name=".ui.AddQuestionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.AddSurveyActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.ViewScoreActivity"
             android:exported="false" />
         <activity

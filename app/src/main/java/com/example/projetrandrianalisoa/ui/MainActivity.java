@@ -1,11 +1,13 @@
 package com.example.projetrandrianalisoa.ui;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -89,6 +91,33 @@ public class MainActivity extends AppCompatActivity {
             );
         }).start();
     }
+
+    /**
+     * Méthode appelée lorsqu'on clique sur le bouton pour ajouter un questionnaire.
+     */
+    public void onAddSurvey(View view) {
+        // Créer un EditText pour saisir le mot de passe
+        EditText input = new EditText(this);
+        input.setHint("Mot de passe administrateur");
+
+        new AlertDialog.Builder(this)
+                .setTitle("Accès administrateur")
+                .setMessage("Veuillez entrer le mot de passe pour ajouter un questionnaire")
+                .setView(input)
+                .setPositiveButton("Valider", (dialog, which) -> {
+                    String password = input.getText().toString().trim();
+                    if ("MDP".equals(password)) { // Mot de passe fixe
+                        // Mot de passe correct, ouvrir l'activité d'ajout
+                        Intent intent = new Intent(MainActivity.this, AddSurveyActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(MainActivity.this, "Mot de passe incorrect", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Annuler", null)
+                .show();
+    }
+
 
     ////////////// Gestion des menus ///////////////
 

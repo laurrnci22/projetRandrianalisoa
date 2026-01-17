@@ -26,4 +26,10 @@
 
     <!-- ViewScoreActivity -->
     <string name="score_s">Score(s)</string>
+    <string name="btnAddSurvey">Ajouter un questionnaire</string>
+    <string name="new_survey">Nouveau questionnaire</string>
+    <string name="category">Catégorie</string>
+    <string name="questionToAsk">Question à poser</string>
+    <string name="correctAnswerIndex">Indice du réponse (1 pour le choix 1, …)</string>
+    <string name="btnAddQuestion">Ajouter une question</string>
 </resources>

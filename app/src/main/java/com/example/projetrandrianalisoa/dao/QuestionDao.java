@@ -33,4 +33,7 @@ public interface QuestionDao {
     int getQuestionCountBySurvey(long surveyId);
     @Insert
     void insertAll(List<QuestionEntity> questions);
+
+    @Insert
+    void insert(QuestionEntity question);
 }

@@ -5,18 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/test_your_knowledge"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.485"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.178" />
+    tools:context=".ui.AddSurveyActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -58,79 +47,81 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.035" />
 
-    <Button
-        android:id="@+id/btnPlay"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onAnswerSurvey"
-        android:text="@string/answer_survey"
-        android:textColor="@color/white"
-        android:textColorLink="@color/ic_launcher_background"
+        android:text="@string/btnAddSurvey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.547"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.351" />
+        app:layout_constraintVertical_bias="0.136" />
 
-    <Button
-        android:id="@+id/btnViewScore"
-        android:layout_width="235dp"
-        android:layout_height="43dp"
-        android:onClick="onViewScore"
-        android:text="@string/btnViewScore"
-        android:textColor="@color/white"
-        android:textColorLink="@color/ic_launcher_background"
+    <EditText
+        android:id="@+id/addCategory"
+        android:layout_width="409dp"
+        android:layout_height="54dp"
+        android:ems="10"
+        android:hint="@string/category_label"
+        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.556"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.441" />
+        app:layout_constraintVertical_bias="0.248" />
 
-    <Button
-        android:id="@+id/btnResetScore"
-        android:layout_width="235dp"
-        android:layout_height="43dp"
-        android:onClick="onResetScores"
-        android:text="@string/btnResetScore"
-        android:textColor="@color/white"
-        android:textColorLink="@color/ic_launcher_background"
+    <ListView
+        android:id="@+id/listAddedQuestion"
+        android:layout_width="409dp"
+        android:layout_height="260dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.556"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.524" />
 
     <Button
-        android:id="@+id/btnAddSurvey"
-        android:layout_width="235dp"
-        android:layout_height="43dp"
-        android:onClick="onAddSurvey"
-        android:text="@string/btnAddSurvey"
+        android:id="@+id/button3"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:onClick="onAddQuestion"
+        android:text="Ajouter une question"
         android:textColor="@color/white"
         android:textColorLink="@color/ic_launcher_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.556"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.609" />
+        app:layout_constraintVertical_bias="0.789" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:layout_width="409dp"
         android:layout_height="wrap_content"
-        android:onClick="onCancel"
-        android:text="@string/exit_app"
+        android:onClick="onValidate"
+        android:text="Valider le questionnaire"
         android:textColor="@color/white"
         android:textColorLink="@color/ic_launcher_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89" />
+        app:layout_constraintVertical_bias="0.878" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:onClick="onCancel"
+        android:text="@string/back"
+        android:textColor="@color/white"
+        android:textColorLink="@color/ic_launcher_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.963" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
