@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/new_game"
-        android:title="TEST 1"/>
-    <item android:id="@+id/help"
-        android:title="test 2" />
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_scores"
+        android:title="@string/btnViewScore"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_reset"
+        android:title="@string/btnResetScore"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_admin"
+        android:title="@string/btnAddSurvey"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_quit"
+        android:title="@string/exit_app"
+        app:showAsAction="never" />
 </menu>

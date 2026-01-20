@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetRandrianalisoa">
         <activity
+            android:name=".ui.AdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.AddQuestionActivity"
             android:exported="false" />
         <activity

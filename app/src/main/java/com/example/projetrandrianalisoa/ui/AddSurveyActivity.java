@@ -108,8 +108,6 @@ public class AddSurveyActivity extends AppCompatActivity {
 
             // Retourner le score à MainActivity sur le thread UI
             runOnUiThread(() -> {
-                Toast.makeText(this, "Questionnaire enregistré avec succès !", Toast.LENGTH_SHORT).show();
-
                 Intent result = new Intent();
                 setResult(RESULT_OK, result);
                 finish();

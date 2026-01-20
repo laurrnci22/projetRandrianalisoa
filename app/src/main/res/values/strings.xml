@@ -32,4 +32,5 @@
     <string name="questionToAsk">Question à poser</string>
     <string name="correctAnswerIndex">Indice du réponse (1 pour le choix 1, …)</string>
     <string name="btnAddQuestion">Ajouter une question</string>
+    <string name="enter_password">Saisissez le mot de passe</string>
 </resources>

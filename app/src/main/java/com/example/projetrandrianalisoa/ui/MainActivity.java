@@ -1,13 +1,11 @@
 package com.example.projetrandrianalisoa.ui;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -61,64 +59,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /**
-     * Méthode appelée lorsqu'on clique sur le bouton pour voir les scores.
-     * Ouvre l'activité ViewScoreActivity.
-     */
-    public void onViewScore(View view) {
-        Intent intent = new Intent(this, ViewScoreActivity.class);
-        startActivity(intent);
-    }
-
-    /**
-     * Méthode appelée lorsqu'on clique sur le bouton pour réinitialiser les scores.
-     */
-    public void onResetScores(View view) {
-        new Thread(() -> {
-            // Supprimer tous les scores
-            db.scoreDao().deleteAllScores();
-
-            // Mettre tous les questionnaires à completed = false
-            List<SurveyEntity> surveys = db.surveyDao().getAll();
-            for (SurveyEntity s : surveys) {
-                s.completed = false;
-            }
-            db.surveyDao().updateAll(surveys);
-
-            // Afficher un message de confirmation sur le thread UI
-            runOnUiThread(() ->
-                    Toast.makeText(MainActivity.this, "Scores réinitialisés et questionnaires non complétés", Toast.LENGTH_SHORT).show()
-            );
-        }).start();
-    }
-
-    /**
-     * Méthode appelée lorsqu'on clique sur le bouton pour ajouter un questionnaire.
-     */
-    public void onAddSurvey(View view) {
-        // Créer un EditText pour saisir le mot de passe
-        EditText input = new EditText(this);
-        input.setHint("Mot de passe administrateur");
-
-        new AlertDialog.Builder(this)
-                .setTitle("Accès administrateur")
-                .setMessage("Veuillez entrer le mot de passe pour ajouter un questionnaire")
-                .setView(input)
-                .setPositiveButton("Valider", (dialog, which) -> {
-                    String password = input.getText().toString().trim();
-                    if ("MDP".equals(password)) { // Mot de passe fixe
-                        // Mot de passe correct, ouvrir l'activité d'ajout
-                        Intent intent = new Intent(MainActivity.this, AddSurveyActivity.class);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(MainActivity.this, "Mot de passe incorrect", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setNegativeButton("Annuler", null)
-                .show();
-    }
-
-
     ////////////// Gestion des menus ///////////////
 
     /**
@@ -136,8 +76,46 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Pour l'instant, aucun traitement spécifique sur les items du menu
-        return true;
+        int id = item.getItemId();
+
+        if (id == R.id.menu_scores) {
+            Intent intent = new Intent(this, ViewScoreActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.menu_reset) {
+            new Thread(() -> {
+                // Supprimer tous les scores
+                db.scoreDao().deleteAllScores();
+
+                // Mettre tous les questionnaires à completed = false
+                List<SurveyEntity> surveys = db.surveyDao().getAll();
+                for (SurveyEntity s : surveys) {
+                    s.completed = false;
+                }
+                db.surveyDao().updateAll(surveys);
+
+                // Afficher un message de confirmation sur le thread UI
+                runOnUiThread(() ->
+                        Toast.makeText(MainActivity.this, "Scores réinitialisés et questionnaires non complétés", Toast.LENGTH_SHORT).show()
+                );
+            }).start();
+            return true;
+        }
+        else if (id == R.id.menu_admin) {
+
+            Intent intent = new Intent(this, AdminActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.menu_quit) {
+            // Sauvegarder les données avant de quitter
+            //sauvegarderDonnees();
+            finishAffinity(); // Ferme proprement toutes les activités de l'app
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     ////////////////////////////////////////////////
