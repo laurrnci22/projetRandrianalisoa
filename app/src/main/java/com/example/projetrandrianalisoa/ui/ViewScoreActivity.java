@@ -10,19 +10,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.projetrandrianalisoa.R;
-import com.example.projetrandrianalisoa.database.AppDatabase;
-import com.example.projetrandrianalisoa.model.ScoreWithTotal;
+import com.example.projetrandrianalisoa.model.domain.ScoreWithTotal;
+import com.example.projetrandrianalisoa.viewmodel.ViewScoreViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ViewScoreActivity extends AppCompatActivity {
 
-    private AppDatabase db;
     private ListView listView;
     private ArrayAdapter<String> adapter;
+    private ViewScoreViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,31 +36,47 @@ public class ViewScoreActivity extends AppCompatActivity {
             return insets;
         });
 
-        db = AppDatabase.getInstance(this);
         listView = findViewById(R.id.listViewScores);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<>());
         listView.setAdapter(adapter);
 
-        new Thread(() -> {
-            List<ScoreWithTotal> scores = db.scoreDao().getScoresWithTotal();
-            float average = db.scoreDao().getAverageScore();
+        // Initialiser le ViewModel
+        viewModel = new ViewModelProvider(this).get(ViewScoreViewModel.class);
 
-            List<String> displayList = new ArrayList<>();
-            for (ScoreWithTotal s : scores) {
-                displayList.add("Note questionnaire " + s.category + " : " + s.score + "/" + s.totalQuestions);
-            }
-            displayList.add("Note moyenne : " + String.format("%.2f", average));
+        // Observer les scores
+        viewModel.getScoresLiveData().observe(this, this::updateList);
+        // Observer la moyenne
+        viewModel.getAverageLiveData().observe(this, this::updateListWithAverage);
 
-            runOnUiThread(() -> {
-                adapter.clear();
-                adapter.addAll(displayList);
-                adapter.notifyDataSetChanged();
-            });
-        }).start();
+        // Charger les scores
+        viewModel.loadScores();
+    }
+
+    /**
+     * Mise à jour de la liste des notes de chaque questionnaire
+     */
+    private void updateList(List<ScoreWithTotal> scores) {
+        List<String> displayList = new ArrayList<>();
+        for (ScoreWithTotal s : scores) {
+            displayList.add("Note questionnaire " + s.category + " : " + s.score + "/" + s.totalQuestions);
+        }
+        adapter.clear();
+        adapter.addAll(displayList);
+        adapter.notifyDataSetChanged();
+    }
+
+    /**
+     * Mise à jour de la moyenne
+     */
+    private void updateListWithAverage(Float average) {
+        // Ajouter la moyenne à la fin
+        adapter.add("Note moyenne : " + String.format("%.2f", average));
+        adapter.notifyDataSetChanged();
     }
 
     /**
      * Méthode appelée lorsqu'on clique sur le bouton retour.
+     * Ferme l'activité et renvoie RESULT_CANCELED à l'appelant.
      */
     public void onCancel(View view) {
         setResult(RESULT_CANCELED);

@@ -9,9 +9,9 @@ import androidx.room.RoomDatabase;
 import com.example.projetrandrianalisoa.dao.QuestionDao;
 import com.example.projetrandrianalisoa.dao.ScoreDao;
 import com.example.projetrandrianalisoa.dao.SurveyDao;
-import com.example.projetrandrianalisoa.model.QuestionEntity;
-import com.example.projetrandrianalisoa.model.ScoreEntity;
-import com.example.projetrandrianalisoa.model.SurveyEntity;
+import com.example.projetrandrianalisoa.model.entity.QuestionEntity;
+import com.example.projetrandrianalisoa.model.entity.ScoreEntity;
+import com.example.projetrandrianalisoa.model.entity.SurveyEntity;
 
 /**
  * Classe de base pour la base de données Room.

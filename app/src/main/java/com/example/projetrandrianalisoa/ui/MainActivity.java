@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,16 +13,18 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import com.example.projetrandrianalisoa.R;
-import com.example.projetrandrianalisoa.database.AppDatabase;
-import com.example.projetrandrianalisoa.model.SurveyEntity;
-import com.example.projetrandrianalisoa.tools.DatabaseInitializer;
+import androidx.lifecycle.ViewModelProvider;
 
-import java.util.List;
+import com.example.projetrandrianalisoa.R;
+import com.example.projetrandrianalisoa.tools.DatabaseInitializer;
+import com.example.projetrandrianalisoa.tools.PopUpHelper;
+import com.example.projetrandrianalisoa.viewmodel.MainViewModel;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    private AppDatabase db;
+    // Intermediaire entre les entités et l'UI
+    private MainViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        db = AppDatabase.getInstance(this);
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         // Récupère la Toolbar et la définit comme ActionBar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -49,17 +50,6 @@ public class MainActivity extends AppCompatActivity {
 
         new Thread(() -> DatabaseInitializer.init(this)).start();
     }
-
-    /**
-     * Méthode appelée lorsqu'on clique sur le bouton pour répondre à un questionnaire.
-     * Ouvre l'activité SurveyActivity.
-     */
-    public void onAnswerSurvey(View view) {
-        Intent intent = new Intent(this, SurveyActivity.class);
-        startActivity(intent);
-    }
-
-    ////////////// Gestion des menus ///////////////
 
     /**
      * Crée le menu de l'activité.
@@ -78,54 +68,46 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        // Pour voir les scores
         if (id == R.id.menu_scores) {
             Intent intent = new Intent(this, ViewScoreActivity.class);
             startActivity(intent);
             return true;
         }
+
+        // Pour réinitialiser les scores
         else if (id == R.id.menu_reset) {
-            new Thread(() -> {
-                // Supprimer tous les scores
-                db.scoreDao().deleteAllScores();
-
-                // Mettre tous les questionnaires à completed = false
-                List<SurveyEntity> surveys = db.surveyDao().getAll();
-                for (SurveyEntity s : surveys) {
-                    s.completed = false;
-                }
-                db.surveyDao().updateAll(surveys);
-
-                // Afficher un message de confirmation sur le thread UI
+            viewModel.resetScoresAndSurveys(() ->
                 runOnUiThread(() ->
-                        Toast.makeText(MainActivity.this, "Scores réinitialisés et questionnaires non complétés", Toast.LENGTH_SHORT).show()
-                );
-            }).start();
+                    PopUpHelper.showMessage(MainActivity.this, "Scores réinitialisés avec succès !")
+                )
+            );
             return true;
         }
-        else if (id == R.id.menu_admin) {
 
+        // Pour l'espace admin, pour ajouter un questionnaire
+        else if (id == R.id.menu_admin) {
             Intent intent = new Intent(this, AdminActivity.class);
             startActivity(intent);
             return true;
         }
+
+        // Pour quitter l'application
         else if (id == R.id.menu_quit) {
-            // Sauvegarder les données avant de quitter
-            //sauvegarderDonnees();
-            finishAffinity(); // Ferme proprement toutes les activités de l'app
+            // Ferme proprement toutes les activités de l'app
+            finishAffinity();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    ////////////////////////////////////////////////
-
     /**
-     * Méthode appelée lorsqu'on clique sur le bouton annuler.
-     * Ferme l'activité et renvoie RESULT_CANCELED à l'appelant.
+     * Méthode appelée lorsqu'on clique sur le bouton pour répondre à un questionnaire.
+     * Ouvre l'activité SurveyActivity.
      */
-    public void onCancel(View view) {
-        setResult(RESULT_CANCELED);
-        finish();
+    public void onAnswerSurvey(View view) {
+        Intent intent = new Intent(this, SurveyActivity.class);
+        startActivity(intent);
     }
 }

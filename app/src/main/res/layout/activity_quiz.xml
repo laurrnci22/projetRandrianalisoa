@@ -55,7 +55,7 @@
         android:gravity="center"
         android:scrollHorizontally="false"
         android:singleLine="false"
-        android:text="@string/category_label"
+        android:text="@string/category"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -1,6 +1,6 @@
 package com.example.projetrandrianalisoa.tools;
 
-import com.example.projetrandrianalisoa.model.QuestionEntity;
+import com.example.projetrandrianalisoa.model.entity.QuestionEntity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
@@ -15,6 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.projetrandrianalisoa.R;
+import com.example.projetrandrianalisoa.tools.PopUpHelper;
 
 public class AdminActivity extends AppCompatActivity {
 
@@ -42,7 +42,7 @@ public class AdminActivity extends AppCompatActivity {
             Intent intent = new Intent(this, AddSurveyActivity.class);
             dynamicLauncher.launch(intent);
         } else {
-            Toast.makeText(this, "Mot de passe incorrect", Toast.LENGTH_SHORT).show();
+            PopUpHelper.showMessage(this, "Mot de passe incorrect");
         }
     }
 
@@ -55,19 +55,18 @@ public class AdminActivity extends AppCompatActivity {
         finish();
     }
 
-
-    // --------------------------
-    // Launcher dynamique
-    // --------------------------
+    /**
+     * Lanceur d'activité dynamique
+     */
     private final ActivityResultLauncher<Intent> dynamicLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == RESULT_OK) {
-                    Toast.makeText(this, "Questionnaire enregistré avec succès !", Toast.LENGTH_SHORT).show();
+        new ActivityResultContracts.StartActivityForResult(),
+        result -> {
+            if (result.getResultCode() == RESULT_OK) {
+                PopUpHelper.showMessage(this, "Questionnaire enregistré avec succès !");
 
-                    setResult(RESULT_OK, new Intent());
-                    finish();
-                }
+                setResult(RESULT_OK, new Intent());
+                finish();
             }
+        }
     );
 }

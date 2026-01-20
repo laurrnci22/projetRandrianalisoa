@@ -3,7 +3,8 @@
     <string name="app_name">projetRandrianalisoa</string>
     <string name="qcm_app">QCM APP</string>
     <string name="back">Retour</string>
-    <string name="category_label">Catégorie</string>
+    <string name="category">Catégorie</string>
+    <string name="btnValidate">Valider</string>
 
     <!-- MainActivity -->
     <string name="exit_app">Quitter l\'application</string>
@@ -20,17 +21,21 @@
     <string name="choice_1">Choix 1</string>
     <string name="choice_2">Choix 2</string>
     <string name="choice_3">Choix 3</string>
-    <string name="btnValidate">Valider</string>
     <string name="btnStop">Stopper</string>
     <string name="question_1_5">Question 1/5</string>
 
     <!-- ViewScoreActivity -->
     <string name="score_s">Score(s)</string>
+
+    <!-- AddSurveyActivity -->
     <string name="btnAddSurvey">Ajouter un questionnaire</string>
     <string name="new_survey">Nouveau questionnaire</string>
-    <string name="category">Catégorie</string>
+
+    <!-- AddQuestionActivity -->
     <string name="questionToAsk">Question à poser</string>
     <string name="correctAnswerIndex">Indice du réponse (1 pour le choix 1, …)</string>
     <string name="btnAddQuestion">Ajouter une question</string>
+
+    <!-- AdminActivity -->
     <string name="enter_password">Saisissez le mot de passe</string>
 </resources>

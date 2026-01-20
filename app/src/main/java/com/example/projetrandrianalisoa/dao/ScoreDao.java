@@ -6,8 +6,8 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.projetrandrianalisoa.model.ScoreEntity;
-import com.example.projetrandrianalisoa.model.ScoreWithTotal;
+import com.example.projetrandrianalisoa.model.entity.ScoreEntity;
+import com.example.projetrandrianalisoa.model.domain.ScoreWithTotal;
 
 /**
  * DAO pour gérer les scores des questionnaires.

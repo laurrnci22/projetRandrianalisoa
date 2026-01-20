@@ -1,4 +1,4 @@
-package com.example.projetrandrianalisoa.model;
+package com.example.projetrandrianalisoa.model.entity;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;

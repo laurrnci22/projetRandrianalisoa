@@ -6,7 +6,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.projetrandrianalisoa.model.QuestionEntity;
+import com.example.projetrandrianalisoa.model.entity.QuestionEntity;
 
 /**
  * DAO pour accéder aux questions d'un questionnaire (Survey).

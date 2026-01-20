@@ -63,7 +63,7 @@
         android:layout_width="409dp"
         android:layout_height="54dp"
         android:ems="10"
-        android:hint="@string/category_label"
+        android:hint="@string/category"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

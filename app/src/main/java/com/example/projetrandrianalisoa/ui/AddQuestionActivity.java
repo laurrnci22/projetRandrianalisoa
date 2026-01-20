@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +12,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.projetrandrianalisoa.R;
+import com.example.projetrandrianalisoa.tools.PopUpHelper;
 
 public class AddQuestionActivity extends AppCompatActivity {
 
@@ -64,14 +64,14 @@ public class AddQuestionActivity extends AppCompatActivity {
 
         // Vérifie si le champ est vide
         if (label.isEmpty() || choice1.isEmpty() || choice2.isEmpty() || choice3.isEmpty() || correctIndexAnswer.isEmpty()) {
-            Toast.makeText(this, "Veuillez renseigner tous les champs avant de valider.", Toast.LENGTH_SHORT).show();
+            PopUpHelper.showMessage(this, "Veuillez renseigner tous les champs avant de valider.");
             return;
         }
 
         int index = Integer.parseInt(correctIndexAnswer);
 
         if(index != 1 && index != 2 && index != 3) {
-            Toast.makeText(this, "Veuillez choisir une indice soit 1, 2 ou 3 !.", Toast.LENGTH_SHORT).show();
+            PopUpHelper.showMessage(this, "Veuillez choisir une indice soit 1, 2 ou 3 !.");
             return;
         }
 

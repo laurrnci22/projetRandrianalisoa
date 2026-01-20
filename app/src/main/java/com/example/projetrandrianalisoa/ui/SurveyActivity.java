@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
@@ -14,10 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.projetrandrianalisoa.R;
-import com.example.projetrandrianalisoa.database.AppDatabase;
-import com.example.projetrandrianalisoa.model.SurveyEntity;
+import com.example.projetrandrianalisoa.model.entity.SurveyEntity;
+import com.example.projetrandrianalisoa.tools.PopUpHelper;
+import com.example.projetrandrianalisoa.viewmodel.SurveyViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +28,13 @@ import java.util.List;
  */
 public class SurveyActivity extends AppCompatActivity {
 
-    // ------------------------
     // Constantes pour les clés de données passées entre activités
-    // ------------------------
     public final static String SURVEY_ID = "com.example.projetrandrianalisoa.SURVEY_ID";
 
     private ListView listView;
-    private AppDatabase db;
+    private SurveyViewModel viewModel;
     private List<SurveyEntity> currentSurveys = new ArrayList<>();
+    private ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,21 +49,21 @@ public class SurveyActivity extends AppCompatActivity {
         });
 
         listView = findViewById(R.id.listViewCategories);
-        db = AppDatabase.getInstance(this);
 
-        // Adapter pour la ListView
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, new ArrayList<>());
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<>());
         listView.setAdapter(adapter);
 
-        // Observer les questionnaires disponibles via LiveData
-        db.surveyDao().getAvailableSurveys().observe(this, surveys -> {
+        // Initialiser ViewModel
+        viewModel = new ViewModelProvider(this).get(SurveyViewModel.class);
+
+        // Observer les questionnaires disponibles
+        viewModel.getAvailableSurveys().observe(this, surveys -> {
             currentSurveys.clear();
             currentSurveys.addAll(surveys);
 
             List<String> displayList = new ArrayList<>();
             for (SurveyEntity survey : surveys) {
-                int count = db.questionDao().getQuestionCountBySurvey(survey.id);
+                int count = viewModel.getQuestionCount(survey);
                 displayList.add(survey.category + " (" + count + " question(s))");
             }
 
@@ -89,9 +89,9 @@ public class SurveyActivity extends AppCompatActivity {
         finish();
     }
 
-    // --------------------------
-    // Launcher dynamique pour récupérer les résultats du quiz
-    // --------------------------
+    /**
+     * Lanceur d'activité dynamique
+     */
     private final ActivityResultLauncher<Intent> dynamicLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
@@ -99,7 +99,7 @@ public class SurveyActivity extends AppCompatActivity {
                     Intent data = result.getData();
                     if (data != null) {
                         int score = data.getIntExtra(QuizActivity.SCORE, 0);
-                        Toast.makeText(this, "Score final : " + score, Toast.LENGTH_LONG).show();
+                        PopUpHelper.showMessage(this, "Score final : " + score);
                     }
                 }
             }

@@ -8,7 +8,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.projetrandrianalisoa.model.SurveyEntity;
+import com.example.projetrandrianalisoa.model.entity.SurveyEntity;
 
 /**
  * DAO pour gérer les questionnaires (Survey).

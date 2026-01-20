@@ -3,8 +3,8 @@ package com.example.projetrandrianalisoa.tools;
 import android.content.Context;
 
 import com.example.projetrandrianalisoa.database.AppDatabase;
-import com.example.projetrandrianalisoa.model.QuestionEntity;
-import com.example.projetrandrianalisoa.model.SurveyEntity;
+import com.example.projetrandrianalisoa.model.entity.QuestionEntity;
+import com.example.projetrandrianalisoa.model.entity.SurveyEntity;
 
 import java.util.List;
 

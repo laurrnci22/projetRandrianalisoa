@@ -1,4 +1,4 @@
-package com.example.projetrandrianalisoa.model;
+package com.example.projetrandrianalisoa.model.domain;
 
 import java.util.List;
 
