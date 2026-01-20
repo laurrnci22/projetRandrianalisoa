@@ -54,7 +54,9 @@ public interface ScoreDao {
      *
      * @return moyenne des scores
      */
-    @Query("SELECT AVG(score) FROM scores")
+    @Query("SELECT (SUM(sc.score) * 20.0) / " +
+            "(SELECT COUNT(*) FROM questions q JOIN scores s ON q.surveyId = s.surveyId) " +
+            "FROM scores sc")
     float getAverageScore();
 
     /**
@@ -72,10 +74,9 @@ public interface ScoreDao {
     void deleteScoresForSurvey(long surveyId);
 
     // Récupérer tous les scores avec le nom du questionnaire
-    @Query("SELECT s.category, sc.score, COUNT(q.id) as totalQuestions " +
-            "FROM surveys s " +
-            "JOIN scores sc ON s.id = sc.surveyId " +
-            "JOIN questions q ON s.id = q.surveyId " +
-            "GROUP BY s.id")
+    @Query("SELECT s.category as category, sc.score as score, " +
+            "(SELECT COUNT(*) FROM questions WHERE surveyId = s.id) as totalQuestions " +
+            "FROM scores sc " +
+            "JOIN surveys s ON sc.surveyId = s.id")
     List<ScoreWithTotal> getScoresWithTotal();
 }
